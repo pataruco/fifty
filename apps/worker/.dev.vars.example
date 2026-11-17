@@ -1,0 +1,5 @@
+# Sample values for `wrangler dev`. Copy this file to .dev.vars (which git
+# ignores). None of these is a real secret, word or address.
+INVITE_WORDS="otter lantern meadow harbour"
+GUEST_KEY="AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8="
+JOIN_EMAIL="join@example.test"
