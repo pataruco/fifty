@@ -1,0 +1,13 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "include-component-in-tag": false,
+  "packages": {
+    ".": {
+      "changelog-path": "CHANGELOG.md",
+      "component": "fifty",
+      "package-name": "fifty",
+      "release-type": "node",
+      "versioning": "default"
+    }
+  }
+}

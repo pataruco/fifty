@@ -46,3 +46,9 @@ tasks:
     options:
       cache: false
       runInCI: true
+  smoke:
+    # After a deploy: SMOKE_BASE_URL and SMOKE_INVITE_WORDS must be set.
+    command: "node scripts/smoke.ts"
+    options:
+      cache: false
+      runInCI: false
