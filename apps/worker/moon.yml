@@ -51,4 +51,3 @@ tasks:
     command: "node scripts/smoke.ts"
     options:
       cache: false
-      runInCI: false

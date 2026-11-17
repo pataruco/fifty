@@ -1,5 +1,23 @@
-import { expect, test } from '@playwright/test';
+import { expect, type Page, test } from '@playwright/test';
 import { LANGS, openHome, VARIANTS } from './helpers.ts';
+
+/** The size of every control that is not a link inside a sentence. */
+function controlSizes(page: Page) {
+  return page.$$eval('a[href], button', (controls) =>
+    controls
+      .filter((el) => {
+        // A link inside a sentence has loose words beside it.
+        const words = [...(el.parentElement?.childNodes ?? [])].some(
+          (n) => n.nodeType === Node.TEXT_NODE && n.textContent?.trim(),
+        );
+        return el.tagName === 'BUTTON' || !words;
+      })
+      .map((el) => {
+        const r = el.getBoundingClientRect();
+        return { text: el.textContent?.trim(), w: r.width, h: r.height };
+      }),
+  );
+}
 
 for (const lang of LANGS) {
   for (const variant of VARIANTS) {
@@ -11,20 +29,7 @@ for (const lang of LANGS) {
       test('every control is at least 44×44 CSS px, except links inside sentences', async ({
         page,
       }) => {
-        const checked = await page.$$eval('a[href], button', (controls) =>
-          controls
-            .filter((el) => {
-              // A link inside a sentence has loose words beside it.
-              const words = [...(el.parentElement?.childNodes ?? [])].some(
-                (n) => n.nodeType === Node.TEXT_NODE && n.textContent?.trim(),
-              );
-              return el.tagName === 'BUTTON' || !words;
-            })
-            .map((el) => {
-              const r = el.getBoundingClientRect();
-              return { text: el.textContent?.trim(), w: r.width, h: r.height };
-            }),
-        );
+        const checked = await controlSizes(page);
 
         expect(checked.length).toBeGreaterThanOrEqual(4);
         expect(checked.filter((r) => r.w < 44 || r.h < 44)).toEqual([]);
@@ -139,4 +144,19 @@ test('the inline style applies and the console shows no CSP message', async ({
   expect(
     messages.filter((m) => /content security policy|csp|refused/i.test(m)),
   ).toEqual([]);
+});
+
+test('every control on the error pages is at least 44×44 CSS px', async ({
+  page,
+}) => {
+  for (const path of ['/nowhere/', '/es/nowhere/', '/hello/old-words-here/']) {
+    await page.goto(path);
+    const checked = await controlSizes(page);
+
+    expect(checked.length, path).toBeGreaterThanOrEqual(4);
+    expect(
+      checked.filter((r) => r.w < 44 || r.h < 44),
+      path,
+    ).toEqual([]);
+  }
 });
