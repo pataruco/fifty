@@ -6,7 +6,7 @@ import { type PlainDate, weekday } from '../time/plain-date.ts';
 import type { Lang } from './lang.ts';
 
 /** Joins a number to its unit so a line never breaks between them. */
-export const NBSP = ' ';
+export const NBSP = String.fromCodePoint(0xa0);
 
 export interface DateOptions {
   readonly weekday: boolean;
@@ -65,7 +65,8 @@ const MONTHS: Readonly<Record<Lang, readonly string[]>> = {
   ],
 };
 
-const weekdayName = (d: PlainDate, lang: Lang) =>
+/** "Monday" or "lunes". */
+export const weekdayName = (d: PlainDate, lang: Lang) =>
   WEEKDAYS[lang][weekday(d)] as string;
 const monthName = (d: PlainDate, lang: Lang) =>
   MONTHS[lang][d.month - 1] as string;
@@ -85,6 +86,13 @@ function monthPart(
     return ` de ${monthName(d, lang)}${o.year ? ` de ${d.year}` : ''}`;
   }
   return ` ${monthName(d, lang)}${o.year ? ` ${d.year}` : ''}`;
+}
+
+/** "May 2027" or "mayo de 2027": the day is ignored. */
+export function formatMonthYear(d: PlainDate, lang: Lang): string {
+  return lang === 'es'
+    ? `${monthName(d, lang)} de ${d.year}`
+    : `${monthName(d, lang)} ${d.year}`;
 }
 
 /** "Friday 12 May 2028" or "viernes 12 de mayo de 2028". */
