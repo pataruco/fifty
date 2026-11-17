@@ -6,6 +6,15 @@ language: "typescript"
 dependsOn:
   - "shared"
 
+fileGroups:
+  # The shared renderer is source code in this project's build: a change
+  # there must invalidate this project's cached results.
+  sources:
+    - "**/*"
+    - "/packages/shared/src/**/*"
+    - "/packages/shared/package.json"
+    - "/tsconfig.base.json"
+
 tasks:
   lint:
     command: "pnpm exec biome check ."
@@ -15,9 +24,15 @@ tasks:
       cache: false
   typecheck:
     command: "pnpm exec tsc -p tsconfig.json"
+    inputs:
+      - "@group(sources)"
   test:
     command: "pnpm exec vitest run"
+    inputs:
+      - "@group(sources)"
   book:
     command: "node src/book/export.ts --out dist/book"
+    inputs:
+      - "@group(sources)"
     outputs:
       - "dist/book"

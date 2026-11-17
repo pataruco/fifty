@@ -6,6 +6,15 @@ language: "typescript"
 dependsOn:
   - "shared"
 
+fileGroups:
+  # The shared renderer is source code in this project's build: a change
+  # there must invalidate this project's cached results.
+  sources:
+    - "**/*"
+    - "/packages/shared/src/**/*"
+    - "/packages/shared/package.json"
+    - "/tsconfig.base.json"
+
 tasks:
   dev:
     command: "pnpm exec wrangler dev"
@@ -18,9 +27,15 @@ tasks:
       cache: false
   typecheck:
     script: "pnpm exec wrangler types --check && pnpm exec tsc -p tsconfig.json"
+    inputs:
+      - "@group(sources)"
   test:
     command: "pnpm exec vitest run"
+    inputs:
+      - "@group(sources)"
   build:
     command: "pnpm exec wrangler deploy --dry-run --outdir dist"
+    inputs:
+      - "@group(sources)"
     outputs:
       - "dist"

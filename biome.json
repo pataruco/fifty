@@ -37,7 +37,8 @@
       "!**/src/generated",
       "!**/*.md",
       "!pnpm-workspace.yaml",
-      "!docs/design"
+      "!docs/design",
+      "!**/*.svg"
     ]
   },
   "vcs": {
