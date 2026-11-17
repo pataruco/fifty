@@ -1,0 +1,132 @@
+name: PR validation
+run-name: ${{ github.actor }} is running PR validation
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+      - "!release-please--branches--main"
+    paths-ignore:
+      - "CHANGELOG.md"
+      - .release-please-manifest.json
+  merge_group:
+    types: [checks_requested]
+
+concurrency:
+  cancel-in-progress: true
+  group: "${{ github.workflow }} @ ${{ github.ref }}"
+
+permissions:
+  contents: read
+
+jobs:
+  commits:
+    name: Conventional commits
+    if: ${{ github.event_name == 'pull_request' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          fetch-depth: 0
+
+      - name: Set environment and install dependencies
+        uses: ./.github/actions/prepare
+
+      - name: Check commit messages
+        uses: ./.github/actions/conventional-commits
+        with:
+          from: ${{ github.event.pull_request.base.sha }}
+          to: ${{ github.event.pull_request.head.sha }}
+
+  lint:
+    name: Lint & format
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+
+      - name: Set environment and install dependencies
+        uses: ./.github/actions/prepare
+
+      - name: Lint
+        run: pnpm exec moon run shared:lint worker:lint web:lint
+
+  typecheck:
+    name: Typecheck
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+
+      - name: Set environment and install dependencies
+        uses: ./.github/actions/prepare
+
+      - name: Typecheck
+        run: pnpm exec moon run shared:typecheck worker:typecheck web:typecheck
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+
+      - name: Set environment and install dependencies
+        uses: ./.github/actions/prepare
+
+      - name: Test
+        run: pnpm exec moon run shared:test worker:test web:test
+
+  book:
+    name: The Book
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+
+      - name: Set environment and install dependencies
+        uses: ./.github/actions/prepare
+
+      - name: Write the Book
+        run: pnpm exec moon run web:book
+
+      - name: Upload the Book
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: the-book
+          path: apps/web/dist/book
+
+  build:
+    name: Build the Worker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+
+      - name: Set environment and install dependencies
+        uses: ./.github/actions/prepare
+
+      - name: Dry-run deploy
+        run: pnpm exec moon run worker:build
+
+      - name: Upload the bundle
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: worker-bundle
+          path: apps/worker/dist
+
+  ci-validation:
+    name: CI validation
+    needs: [commits, lint, typecheck, test, book, build]
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+
+      - name: Check jobs for errors
+        uses: ./.github/actions/ci-validation
+        with:
+          needs: ${{ toJSON(needs) }}

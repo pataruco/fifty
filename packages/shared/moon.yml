@@ -1,0 +1,24 @@
+$schema: "../../node_modules/@moonrepo/cli/schemas/project.json"
+
+layer: "library"
+language: "typescript"
+
+tasks:
+  styles:
+    command: "node scripts/build-styles.ts"
+    inputs:
+      - "scripts/build-styles.ts"
+      - "src/styles/**/*"
+      - "src/brand/**/*"
+    options:
+      cache: false
+  lint:
+    command: "pnpm exec biome check ."
+  format:
+    command: "pnpm exec biome format --write ."
+    options:
+      cache: false
+  typecheck:
+    script: "pnpm exec tsc -p tsconfig.json && pnpm exec tsc -p tsconfig.node.json"
+  test:
+    command: "pnpm exec vitest run"

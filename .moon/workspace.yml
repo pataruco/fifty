@@ -1,0 +1,11 @@
+$schema: "../node_modules/@moonrepo/cli/schemas/workspace.json"
+
+projects:
+  shared: "packages/shared"
+  worker: "apps/worker"
+  web: "apps/web"
+
+vcs:
+  client: "git"
+  provider: "github"
+  defaultBranch: "main"

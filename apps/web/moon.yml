@@ -1,0 +1,23 @@
+$schema: "../../node_modules/@moonrepo/cli/schemas/project.json"
+
+layer: "application"
+language: "typescript"
+
+dependsOn:
+  - "shared"
+
+tasks:
+  lint:
+    command: "pnpm exec biome check ."
+  format:
+    command: "pnpm exec biome format --write ."
+    options:
+      cache: false
+  typecheck:
+    command: "pnpm exec tsc -p tsconfig.json"
+  test:
+    command: "pnpm exec vitest run"
+  book:
+    command: "node src/book/export.ts --out dist/book"
+    outputs:
+      - "dist/book"

@@ -1,0 +1,26 @@
+$schema: "../../node_modules/@moonrepo/cli/schemas/project.json"
+
+layer: "application"
+language: "typescript"
+
+dependsOn:
+  - "shared"
+
+tasks:
+  dev:
+    command: "pnpm exec wrangler dev"
+    preset: "server"
+  lint:
+    command: "pnpm exec biome check ."
+  format:
+    command: "pnpm exec biome format --write ."
+    options:
+      cache: false
+  typecheck:
+    script: "pnpm exec wrangler types --check && pnpm exec tsc -p tsconfig.json"
+  test:
+    command: "pnpm exec vitest run"
+  build:
+    command: "pnpm exec wrangler deploy --dry-run --outdir dist"
+    outputs:
+      - "dist"
