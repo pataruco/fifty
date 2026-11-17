@@ -7,7 +7,9 @@
     "@fifty/shared": "workspace:*"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
     "@cloudflare/vitest-plugin": "^1.8.4",
+    "@playwright/test": "^1.65.1",
     "@types/node": "catalog:",
     "typescript": "catalog:",
     "vitest": "catalog:",

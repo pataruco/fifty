@@ -39,3 +39,10 @@ tasks:
       - "@group(sources)"
     outputs:
       - "dist"
+  e2e:
+    command: "pnpm exec playwright test -c e2e/playwright.config.ts"
+    inputs:
+      - "@group(sources)"
+    options:
+      cache: false
+      runInCI: true

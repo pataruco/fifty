@@ -137,9 +137,30 @@ jobs:
           name: worker-bundle
           path: apps/worker/dist
 
+  e2e:
+    name: Browser checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          # Moon compares against main to find what changed; a shallow
+          # checkout has no main to compare against.
+          fetch-depth: 0
+
+      - name: Set environment and install dependencies
+        uses: ./.github/actions/prepare
+
+      - name: Install the browsers
+        working-directory: apps/worker
+        run: pnpm exec playwright install --with-deps chromium webkit
+
+      - name: Check the pages in Chromium and WebKit
+        run: pnpm exec moon run worker:e2e
+
   ci-validation:
     name: CI validation
-    needs: [commits, lint, typecheck, test, book, build]
+    needs: [commits, lint, typecheck, test, book, build, e2e]
     if: ${{ always() }}
     runs-on: ubuntu-latest
     steps:
