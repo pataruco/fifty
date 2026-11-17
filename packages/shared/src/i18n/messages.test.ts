@@ -33,6 +33,8 @@ const facts = {
   confirmBy: WALK.provisional.confirmBy,
   parts: PARTS.length,
   part: 2,
+  inSentence: 'Ferry to Spain, Portsmouth to Ferrol',
+  title: 'Winchester and the South Downs',
 };
 
 /** Every string the messages can produce, functions called with facts. */

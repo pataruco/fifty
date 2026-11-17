@@ -27,6 +27,26 @@ export const es = {
   footer: {
     contact: 'Escríbeme',
   },
+  joinEmail: {
+    partSubject: ({ part }) => `Ir a la parte ${part} de tu caminata`,
+    partBody: ({ part, inSentence, from, to }) =>
+      `Hola, Pedro:\n\nMe gustaría ir a la parte ${part}: ${inSentence}, ${formatDateRange(from, to, 'es', { weekday: true, year: true })}.`,
+    daySubject: ({ date }) =>
+      `Ir contigo el ${formatDate(date, 'es', { weekday: true, year: true })}`,
+    dayBody: ({ date, title }) =>
+      `Hola, Pedro:\n\nMe gustaría ir contigo a la caminata del ${formatDate(date, 'es', { weekday: true, year: true })}: ${title}.`,
+  },
+  errors: {
+    notFound: {
+      heading: 'Esta página no existe',
+      link: 'Leer la invitación',
+    },
+    inviteGone: {
+      heading: 'Este enlace de invitación ya no funciona',
+      body: 'Puede que Pedro lo haya cambiado. Si conoces a Pedro, pídele el nuevo en hola@pataruco.dev.',
+      link: 'Leer la invitación',
+    },
+  },
   home: {
     title: 'Camina un día conmigo',
     description:
@@ -62,11 +82,16 @@ export const es = {
     route: {
       heading: ({ parts }) => `La ruta en ${parts} partes`,
       intro: `Puedes acompañarme en cualquier parte. Ven 1${NBSP}día o quédate más.`,
+      publicLine:
+        'Esta es una carta abierta para la gente que conozco. Si eres tú, pídeme tu enlace.',
     },
+    mailLine:
+      'Se abre un correo a Pedro con la parte o el día ya escritos. Puedes cambiar el correo antes de enviarlo.',
     youCanJoin: 'Puedes venir',
     parts: {
       1: {
         name: 'Inglaterra: de Reading a Southampton',
+        inSentence: 'Inglaterra, de Reading a Southampton',
         about: ({ km }) =>
           `${formatDistance(km, 'es')} por un sendero llamado St James' Way.`,
         invite: ({ walkingDays, dayTripDays }) =>
@@ -74,6 +99,7 @@ export const es = {
       },
       2: {
         name: 'Ferry a España: de Portsmouth a Ferrol',
+        inSentence: 'ferry a España, de Portsmouth a Ferrol',
         about:
           'Sin caminar. Un ferry hasta Santander, en España. Después, autobús o tren por la costa norte hasta Ferrol.',
         invite: ({ departs, arrives }) =>
@@ -81,12 +107,14 @@ export const es = {
       },
       3: {
         name: 'España: de Ferrol a Santiago de Compostela',
+        inSentence: 'España, de Ferrol a Santiago de Compostela',
         about: ({ km }) => `${formatDistance(km, 'es')} por el Camino Inglés.`,
         invite: ({ walkingDays, arrival }) =>
           `Camina los ${plural(walkingDays, 'día', 'días')}, o ven en avión a Santiago de Compostela para la llegada, el ${formatDate(arrival, 'es', day)}.`,
       },
       4: {
         name: 'España: de Santiago de Compostela a Finisterre',
+        inSentence: 'España, de Santiago de Compostela a Finisterre',
         about: ({ km }) =>
           `${formatDistance(km, 'es')} hasta la costa del Atlántico.`,
         invite: ({ walkingDays, lastDay, lastDayKm }) =>

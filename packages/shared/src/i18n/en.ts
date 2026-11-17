@@ -25,6 +25,26 @@ export const en = {
   footer: {
     contact: 'Contact me',
   },
+  joinEmail: {
+    partSubject: ({ part }) => `Joining part ${part} of your walk`,
+    partBody: ({ part, inSentence, from, to }) =>
+      `Hi Pedro,\n\nI'd like to join part ${part}: ${inSentence}, ${formatDateRange(from, to, 'en', { weekday: true, year: true })}.`,
+    daySubject: ({ date }) =>
+      `Joining you on ${formatDate(date, 'en', { weekday: true, year: true })}`,
+    dayBody: ({ date, title }) =>
+      `Hi Pedro,\n\nI'd like to join your day walk on ${formatDate(date, 'en', { weekday: true, year: true })}: ${title}.`,
+  },
+  errors: {
+    notFound: {
+      heading: 'This page does not exist',
+      link: 'Read the invitation',
+    },
+    inviteGone: {
+      heading: 'This invite link no longer works',
+      body: 'Pedro may have changed it. If you know Pedro, ask him for the new one at hola@pataruco.dev.',
+      link: 'Read the invitation',
+    },
+  },
   home: {
     title: 'Walk a day with me',
     description:
@@ -58,11 +78,16 @@ export const en = {
     route: {
       heading: ({ parts }) => `The route in ${parts} parts`,
       intro: `You can join any part. Come for 1${NBSP}day or stay for more.`,
+      publicLine:
+        "This is an open letter to people I know. If that's you, ask me for your link.",
     },
+    mailLine:
+      'This opens an email to Pedro with the part or day already written in it. You can change the email before you send it.',
     youCanJoin: 'You can join',
     parts: {
       1: {
         name: 'England: Reading to Southampton',
+        inSentence: 'England, Reading to Southampton',
         about: ({ km }) =>
           `${formatDistance(km, 'en')} on a path called St James' Way.`,
         invite: ({ walkingDays, dayTripDays }) =>
@@ -70,6 +95,7 @@ export const en = {
       },
       2: {
         name: 'Ferry to Spain: Portsmouth to Ferrol',
+        inSentence: 'Ferry to Spain, Portsmouth to Ferrol',
         about:
           'No walking. A ferry to Santander in Spain, then a bus or train along the north coast to Ferrol.',
         invite: ({ departs, arrives }) =>
@@ -77,6 +103,7 @@ export const en = {
       },
       3: {
         name: 'Spain: Ferrol to Santiago de Compostela',
+        inSentence: 'Spain, Ferrol to Santiago de Compostela',
         about: ({ km }) =>
           `${formatDistance(km, 'en')} on a path called the Camino Inglés. That means the English Way.`,
         invite: ({ walkingDays, arrival }) =>
@@ -84,6 +111,7 @@ export const en = {
       },
       4: {
         name: 'Spain: Santiago de Compostela to Finisterre',
+        inSentence: 'Spain, Santiago de Compostela to Finisterre',
         about: ({ km }) => `${formatDistance(km, 'en')} to the Atlantic coast.`,
         invite: ({ walkingDays, lastDay, lastDayKm }) =>
           `Walk all ${plural(walkingDays, 'day', 'days')}, or only the last one on ${formatDate(lastDay, 'en', day)}. It is ${formatDistance(lastDayKm, 'en')}.`,
