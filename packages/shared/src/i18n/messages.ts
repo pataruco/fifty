@@ -13,6 +13,8 @@ type Sentence<F> = (facts: F) => string;
 interface PartMessages<Invite> {
   /** "England: Reading to Southampton"; the page adds the number. */
   readonly name: string;
+  /** The name as it reads inside a sentence of the join email. */
+  readonly inSentence: string;
   /** The line under the heading, with the distance where there is one. */
   readonly about: Sentence<{ km: number }> | string;
   readonly invite: Sentence<Invite>;
@@ -30,6 +32,28 @@ export interface Messages {
   };
   readonly footer: {
     readonly contact: string;
+  };
+  readonly joinEmail: {
+    readonly partSubject: Sentence<{ part: PartNumber }>;
+    readonly partBody: Sentence<{
+      part: PartNumber;
+      inSentence: string;
+      from: PlainDate;
+      to: PlainDate;
+    }>;
+    readonly daySubject: Sentence<{ date: PlainDate }>;
+    readonly dayBody: Sentence<{ date: PlainDate; title: string }>;
+  };
+  readonly errors: {
+    readonly notFound: {
+      readonly heading: string;
+      readonly link: string;
+    };
+    readonly inviteGone: {
+      readonly heading: string;
+      readonly body: string;
+      readonly link: string;
+    };
   };
   readonly home: {
     readonly title: string;
@@ -58,7 +82,11 @@ export interface Messages {
     readonly route: {
       readonly heading: Sentence<{ parts: number }>;
       readonly intro: string;
+      /** For public visitors, who have no join buttons. */
+      readonly publicLine: string;
     };
+    /** Under the first join button: what the buttons do. */
+    readonly mailLine: string;
     readonly youCanJoin: string;
     readonly parts: {
       readonly 1: PartMessages<{ walkingDays: number; dayTripDays: number }>;

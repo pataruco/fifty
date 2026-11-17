@@ -7,8 +7,10 @@
     ".": "./src/index.ts"
   },
   "devDependencies": {
+    "@types/jsdom": "^30.0.0",
     "@types/node": "catalog:",
     "esbuild": "^0.28.2",
+    "jsdom": "catalog:",
     "typescript": "catalog:",
     "vitest": "catalog:"
   }

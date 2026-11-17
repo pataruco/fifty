@@ -74,11 +74,10 @@ export function emailAddress(value: string): EmailAddress {
 const encodeMailPart = (text: string) =>
   encodeURIComponent(text.replace(/\r?\n/g, '\r\n'));
 
-export function mailtoHref(o: {
-  to: EmailAddress;
-  subject: string;
-  body: string;
-}): Href {
+export function mailtoHref(
+  o: { to: EmailAddress } | { to: EmailAddress; subject: string; body: string },
+): Href {
+  if (!('subject' in o)) return asHref(`mailto:${o.to}`);
   return asHref(
     [
       `mailto:${o.to}`,

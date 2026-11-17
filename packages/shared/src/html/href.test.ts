@@ -19,6 +19,12 @@ describe('href', () => {
     expect(href).toBe('mailto:a@b.test?subject=D%C3%ADa%205&body=a%0D%0Ab');
   });
 
+  test('mailtoHref with no subject or body is the bare address', () => {
+    expect(mailtoHref({ to: emailAddress('hola@pataruco.dev') })).toBe(
+      'mailto:hola@pataruco.dev',
+    );
+  });
+
   test('emailAddress rejects spaces, quotes and angle brackets', () => {
     for (const bad of [
       'a b@c.test',
