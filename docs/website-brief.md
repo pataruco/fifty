@@ -86,6 +86,20 @@ Pedro carries an iPhone 16 Pro Max and has an iCloud account.
 
 Assumed, not yet confirmed: hidden from search engines; called Fifty; WCAG 2.2 AAA where possible.
 
+### Decisions taken while building (17 November 2026, no ADR yet)
+
+Made while building the first slice, the Invitation Home, from the plan in `docs/superpowers/plans/2026-11-17-invitation-home-slice.md`.
+
+| Question | Decision |
+| --- | --- |
+| Styles and the CSP | The stylesheet, logo and favicon are built into one generated, committed module. The Worker, its tests and plain Node all inline the same bytes, so one SHA-256 hash in the Content Security Policy allows the style, and nothing else loads |
+| Who is a guest | Opening the invite link sets a signed cookie, `__Host-fifty-guest`. It is signed with a key of its own, not with the words, so changing the words keeps every guest and changing the key removes them all. It renews every 30 days and ends on 1 July 2028 |
+| The invite words | A Worker secret, never in the repository. Fewer than 3 words, or none, and no link works |
+| Dates without `Intl` | Weekday and month names come from the site's own tables, so Node and the Worker write the same bytes |
+| The Book | Written by plain Node from the same renderer, with links that work from disk. CI writes it on every pull request |
+| Workers Cache | Off. It keys on the address and ignores the guest cookie, so it could hand a guest page to the public |
+| Search engines | `robots.txt` lets crawlers in, so they can read `noindex`; every page says `noindex, nofollow` in a meta tag and a header |
+
 ## Pedro's conventions, taken from his other repositories
 
 El Guacal (`github.com/pataruco/el-guacal`) is the model for how he documents and runs a project. ADRs use Michael Nygard's template (Status, Context, Decision, Consequences with "Positive:" and "Negative:" lines), numbered, in `docs/adrs`, in British English. Documents carry "Status / Author: Pedro (with Claude as editor) / Date". He keeps a product brief at `docs/product/brief.md` and design notes and agent prompts in `docs/design/`; his prompt for a coding agent there is a long, step-by-step task file with exact file paths and code. Moon version 2 is installed as `@moonrepo/cli` and run as `pnpm exec moon run <project>:<task>`. CI is GitHub Actions with pinned action SHAs, conventional commits, release-please, and deploys started by hand from a tag.
@@ -110,10 +124,11 @@ In the brief: whether people should be invited onto the ferry; whether the Conte
 
 ## Next steps
 
-1. Make the plan Pedro asked for on 17 November, from this note and the design brief.
-2. Copy the tech spec, the nine ADRs and draft 4 of the brief into the repository's `docs/` once the computer is reachable. Merge draft 4 into the brief at `docs/design/design-brief.md`, and do not overwrite it: that copy carries the decisions of 17 November.
-3. Write ADRs for the decisions of 17 November that replace earlier ones (site build, live status, seasons), and redraft section 2 of the tech spec against them.
-4. Redraw the canvas to match the brief. The export in `docs/design/` was checked against the brief on 17 November, and the brief lists every difference under "Where the canvas and this brief differ". The largest: the line under the first button still says WhatsApp, and only a guest's screens are drawn, so the public's Home in both seasons is missing.
-5. Pedro reviews section 2 of the tech spec.
-6. Section 3, Data and content.
-7. The remaining sections, then the build prompt for the Claude agent in Delta.
+1. Done on 17 November: the plan, and the first slice built from it (the Invitation Home in English and Spanish, guests, the Book, browser checks, and the deploy and release workflows, written but not run). Pedro reviews the four Home snapshots in `packages/shared/src/render/__snapshots__/` for the copy, rewrites the Spanish drafts, and settles the miles total (computed as 196; the canvas says 195) and the logo name ("Martin" or "Martín").
+2. Before going live: work through the checklist in `docs/runbooks/secrets-and-words.md`.
+3. Copy the tech spec, the nine ADRs and draft 4 of the brief into the repository's `docs/` once the computer is reachable. Merge draft 4 into the brief at `docs/design/design-brief.md`, and do not overwrite it: that copy carries the decisions of 17 November.
+4. Write ADRs for the decisions of 17 November that replace earlier ones (site build, live status, seasons), and redraft section 2 of the tech spec against them.
+5. Redraw the canvas to match the brief. The export in `docs/design/` was checked against the brief on 17 November, and the brief lists every difference under "Where the canvas and this brief differ". The largest: the line under the first button still says WhatsApp, and only a guest's screens are drawn, so the public's Home in both seasons is missing.
+6. Pedro reviews section 2 of the tech spec.
+7. Section 3, Data and content.
+8. The remaining sections, then the build prompt for the Claude agent in Delta.

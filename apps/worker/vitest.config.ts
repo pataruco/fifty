@@ -30,7 +30,7 @@ export default defineConfig({
         // The deploy configuration, read from disk in Node.
         test: {
           name: 'node',
-          include: ['config/**/*.test.ts'],
+          include: ['config/**/*.test.ts', 'scripts/**/*.test.ts'],
           environment: 'node',
         },
       },

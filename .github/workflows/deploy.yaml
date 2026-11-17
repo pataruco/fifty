@@ -1,0 +1,112 @@
+name: Deploy
+run-name: ${{ github.actor }} is deploying ${{ inputs.tag }}
+
+# Started by hand from a release tag. Pedro makes the first deploy himself
+# (see docs/runbooks/secrets-and-words.md); this workflow is for the ones
+# after it.
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "The release tag to deploy, such as v0.1.0"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    name: Verify the tag
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check the tag looks like a release
+        env:
+          TAG: ${{ inputs.tag }}
+        run: |
+          if ! [[ "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::Not a release tag: $TAG"
+            exit 1
+          fi
+
+      - name: Checkout 🛎️
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          fetch-depth: 0
+          ref: refs/tags/${{ inputs.tag }}
+
+      - name: Set environment and install dependencies
+        uses: ./.github/actions/prepare
+
+      - name: Typecheck, test, write the Book and build
+        run: pnpm exec moon run shared:typecheck worker:typecheck web:typecheck shared:test worker:test web:test web:book worker:build
+
+  deploy:
+    name: Deploy the Worker
+    needs: [verify]
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          ref: refs/tags/${{ inputs.tag }}
+
+      - name: Set environment and install dependencies
+        uses: ./.github/actions/prepare
+
+      - name: Deploy
+        working-directory: apps/worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          TAG: ${{ inputs.tag }}
+        run: pnpm exec wrangler deploy --tag "$TAG" --message "Deploy $TAG"
+
+  smoke:
+    name: Smoke test, and roll back if it fails
+    needs: [deploy]
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          ref: refs/tags/${{ inputs.tag }}
+
+      - name: Set environment and install dependencies
+        uses: ./.github/actions/prepare
+
+      - name: Smoke test
+        env:
+          SMOKE_BASE_URL: https://fifty.pataruco.dev
+          SMOKE_INVITE_WORDS: ${{ secrets.INVITE_WORDS }}
+        run: pnpm exec moon run worker:smoke
+
+      - name: Roll back
+        if: ${{ failure() }}
+        working-directory: apps/worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          TAG: ${{ inputs.tag }}
+        run: pnpm exec wrangler rollback --yes --message "Smoke test failed for $TAG"
+
+  ci-validation:
+    name: CI validation
+    needs: [verify, deploy, smoke]
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+
+      - name: Check jobs for errors
+        uses: ./.github/actions/ci-validation
+        with:
+          needs: ${{ toJSON(needs) }}
