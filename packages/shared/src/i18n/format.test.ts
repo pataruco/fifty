@@ -5,8 +5,10 @@ import {
   formatDate,
   formatDateRange,
   formatDistance,
+  formatMonthYear,
   kmToMiles,
   NBSP,
+  weekdayName,
 } from './format.ts';
 
 const may = (day: number) =>
@@ -70,10 +72,18 @@ describe('format', () => {
     expect([110, 115, 90, 13, 315].map(kmToMiles)).toEqual([
       68, 71, 56, 8, 196,
     ]);
-    expect(NBSP).toBe(' ');
+    expect(NBSP.codePointAt(0)).toBe(0xa0);
+    expect(NBSP).toHaveLength(1);
     expect(formatDistance(110, 'en')).toBe(`110${NBSP}km (68${NBSP}miles)`);
     expect(formatDistance(110, 'es')).toBe(`110${NBSP}km`);
     expect(formatDistance(2, 'en')).toBe(`2${NBSP}km (1${NBSP}mile)`);
+  });
+
+  test('month and year, and a weekday on its own', () => {
+    expect(formatMonthYear(plainDate('2027-05-01'), 'en')).toBe('May 2027');
+    expect(formatMonthYear(plainDate('2027-05-01'), 'es')).toBe('mayo de 2027');
+    expect(weekdayName(may(15), 'en')).toBe('Monday');
+    expect(weekdayName(may(17), 'es')).toBe('miércoles');
   });
 
   test('capitalise upper-cases only the first letter', () => {
