@@ -50,14 +50,34 @@ export function faviconDataUrl(svg: string): `data:${string}` {
   return `data:image/svg+xml,${encodeURIComponent(compact)}`;
 }
 
+/**
+ * The page loads nothing from the network and inlines the stylesheet, so
+ * the stylesheet may not fetch anything or close its own element.
+ */
+function refuseUnsafeCss(css: string): void {
+  const refusals: [RegExp, string][] = [
+    [/<\/style/i, '</style'],
+    [/@import/i, '@import'],
+    [/@font-face/i, '@font-face'],
+    [/url\(\s*(?!['"]?data:)/i, 'a url() other than data:'],
+  ];
+  for (const [pattern, what] of refusals) {
+    if (pattern.test(css)) {
+      throw new Error(`stylesheet: ${what} is not allowed`);
+    }
+  }
+}
+
 export async function buildAssetsModule(
   sources: AssetSources,
 ): Promise<string> {
+  refuseUnsafeCss(sources.css);
   const { code } = await transform(sources.css, {
     loader: 'css',
     minify: true,
   });
   const css = code.trimEnd();
+  refuseUnsafeCss(css);
   const styleHash = `sha256-${createHash('sha256').update(css, 'utf8').digest('base64')}`;
   const literal = (value: string) => JSON.stringify(value);
 
