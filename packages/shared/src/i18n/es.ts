@@ -50,9 +50,9 @@ export const es = {
   home: {
     title: 'Camina un día conmigo',
     description:
-      'En mayo de 2028 cumplo 50 años. Para celebrarlo, voy a caminar desde Reading, en Inglaterra, hasta Finisterre, en España. Puedes acompañarme un día o más.',
+      'En mayo de 2028 voy a caminar desde Reading, en Inglaterra, hasta Finisterre, en España. Es por mis 50 años, que cumplo en julio. Puedes acompañarme un día o más.',
     h1: 'Camina un día conmigo',
-    lead: 'En mayo de 2028 cumplo 50 años. Para celebrarlo, voy a caminar desde Reading, en Inglaterra, hasta Finisterre, en España. Puedes acompañarme un día o más.',
+    lead: 'En mayo de 2028 voy a caminar desde Reading, en Inglaterra, hasta Finisterre, en España. Es por mis 50 años, que cumplo en julio. Puedes acompañarme un día o más.',
     seeWhere: 'Ver dónde puedes acompañarme',
     plan: {
       heading: 'El plan',
@@ -83,7 +83,7 @@ export const es = {
       heading: ({ parts }) => `La ruta en ${parts} partes`,
       intro: `Puedes acompañarme en cualquier parte. Ven 1${NBSP}día o quédate más.`,
       publicLine:
-        'Esta es una carta abierta para la gente que conozco. Si eres tú, pídeme tu enlace.',
+        'Para acompañarme necesitas mi enlace de invitación. Si me conoces, pídemelo en hola@pataruco.dev.',
     },
     mailLine:
       'Se abre un correo a Pedro con la parte o el día ya escritos. Puedes cambiar el correo antes de enviarlo.',
