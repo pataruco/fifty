@@ -10,15 +10,15 @@ Fifty has three jobs, one after another. Before the walk it is an invitation: it
 
 ## Decisions made on 15 November 2026
 
-| Question | Decision | What follows |
-|---|---|---|
-| Who sees what | Public story, private details | Anyone can read the invitation, the route, the dates and the journal. Pedro's position on the ground is shown only to people who arrive through the invite link. Made stricter on 17 November: see the next table. |
-| How live the location is | Check-ins, plus live tracking on meet-up days | Pedro taps "I'm here" a few times a day. On days when people are joining he also runs a tracker app (OwnTracks), so guests can find him. Who sends the check-in was reopened on 17 November: see the next table. |
-| How the journal is written | In Contentful | No editor to build. The weak points (signal, phone ergonomics, photo weight, long-term dependence) are dealt with under "The journal". Changed on 17 November: see the next table. |
-| How people join | They message Pedro; the site keeps no list. Every part of the route carries its own invitation | No form, no stored submissions, no names of companions on the site. Each of the four parts says how to join it and has its own button. Meeting details travel by message. |
-| How the words are written | Content design practice | Start from what the reader needs, say the most important thing first, use plain words. See "Words on the page". |
-| Languages | English and Spanish | Every page exists in both. Spanish is localised, not only translated. See "Language". |
-| The look | Direction D, pataruco.dev | Fifty uses the styles of Pedro's own blog. See "Look and feel". |
+| Question                   | Decision                                                                                       | What follows                                                                                                                                                                                                       |
+| -------------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Who sees what              | Public story, private details                                                                  | Anyone can read the invitation, the route, the dates and the journal. Pedro's position on the ground is shown only to people who arrive through the invite link. Made stricter on 17 November: see the next table. |
+| How live the location is   | Check-ins, plus live tracking on meet-up days                                                  | Pedro taps "I'm here" a few times a day. On days when people are joining he also runs a tracker app (OwnTracks), so guests can find him. Who sends the check-in was reopened on 17 November: see the next table.   |
+| How the journal is written | In Contentful                                                                                  | No editor to build. The weak points (signal, phone ergonomics, photo weight, long-term dependence) are dealt with under "The journal". Changed on 17 November: see the next table.                                 |
+| How people join            | They message Pedro; the site keeps no list. Every part of the route carries its own invitation | No form, no stored submissions, no names of companions on the site. Each of the four parts says how to join it and has its own button. Meeting details travel by message.                                          |
+| How the words are written  | Content design practice                                                                        | Start from what the reader needs, say the most important thing first, use plain words. See "Words on the page".                                                                                                    |
+| Languages                  | English and Spanish                                                                            | Every page exists in both. Spanish is localised, not only translated. See "Language".                                                                                                                              |
+| The look                   | Direction D, pataruco.dev                                                                      | Fifty uses the styles of Pedro's own blog. See "Look and feel".                                                                                                                                                    |
 
 Assumed until Pedro says otherwise: the site is hidden from search engines; it is called Fifty; the only way to respond to a journal entry is to message Pedro; accessibility aims for WCAG 2.2 AAA where it can, as Pedro's other sites do; most Spanish readers are in Venezuela.
 
@@ -26,52 +26,52 @@ Assumed until Pedro says otherwise: the site is hidden from search engines; it i
 
 An adversarial review of this brief, and what Pedro said during it, led to these. Where they differ from the table above, these win.
 
-| Question | Decision | What follows |
-|---|---|---|
-| What the trail asks of the site | Pedro writes and edits during the walk, often with no signal, and uploads crawl | These are given, not things for a rehearsal to find out. Most of the decisions below follow from them. |
-| Where the journal is written | On the trail page, in a form that keeps drafts on the phone | The phone never talks to Contentful on the trail, because Contentful does not support mobile browsers, cannot work offline and cannot resume an upload. So one form has to be built after all. Contentful stays for what is written at a desk. See "The journal". |
-| Where trail writing is kept | In the site's own store | Journal entries, check-ins and changes of plan are kept by the site itself and are live as soon as they arrive. The site also keeps its own copy of what is written in Contentful. See "What lives where". |
-| How photos travel | Shrunk on the phone, then sent in pieces | About 1600 px on the long side and 300 to 500 KB, with the location inside the photo removed. Words go first; photos follow and carry on from where they stopped. Originals go into The Book afterwards. See "Sending an entry". |
-| Where photos are kept | On Pedro's phone, and in Contentful | The originals stay in the phone's photo library. The copies the site shows are kept in Contentful: the phone sends each small copy to the site, and the site passes it on. The site needs no photo store of its own. Pedro can upload originals to Contentful himself from a desk. See "Sending an entry". |
-| What else Pedro can change from the phone | A notice, and today's stage | No laptop and no deploy. Today can become a shorter or longer stage, a rest day or a travel day. See "When the plan changes". |
-| What a day page shows when stages move | A travel log | A day keeps its date. Its page shows the plan until the day comes, and what Pedro did from then on. See "When the plan changes". |
-| How pages are made | The site makes each page when it is asked for, from its own copy | Publishing changes data and never needs a deploy, so the freeze on 23 April 2028 is a freeze of the code. If a page cannot be made, the last good copy is shown. The Book is the same pages, made once and saved as files. The detail belongs in the tech spec. |
-| How precise the public status is | The last named place Pedro has passed, and the part of the day | On a published route a distance and a clock time together are a position, so both are for guests. See "Where Pedro is". |
-| Who sends a check-in | OwnTracks, if rehearsal 1 shows it is quick with one hand | It already keeps a position that cannot be sent and posts it later. If it takes more than ten seconds, the trail page keeps its own "I'm here" button. See "The trail page". |
-| How light a page is | As few requests as it can be | Styles travel inside the page. No font file is shipped. The status refreshes only while the page is on screen and the day is still open, and the reader can stop it. |
-| What happens to guests when the invite words change | They stay guests | Changing the words keeps new devices out. It removes no one who is already in. See "Guests". |
-| What the footer carries | Fifty's own, not the blog's | A link to About, the journal's feed, a link to pataruco.dev and `hola@pataruco.dev`. No LinkedIn, GitHub or Bluesky, no blog feed and no "Updated on" line. See "On every page". |
-| How times reach the reader | Kept in UTC. Shown in the walker's time, with the reader's own time added on their device | The page arrives with the walker's time and country, so it reads without JavaScript. Where JavaScript runs, the reader's own time is added and called "your time". The site never names the reader's country. See "Rules" and "Language". |
-| Which apps carry messages | Email and text messages (SMS). No WhatsApp: Pedro does not use it, because it is a Meta product | The buttons that message Pedro open an email to an address made only for Fifty in his iCloud account. His phone number is not on the site: he gives it when he replies. Once a day is arranged, Pedro and the companion keep in touch by text message, on the day as well. Pedro posts in no family chat: one relative shares the link in the chat the family already uses, whichever app that is. The site still sends no notifications. See "Walk with me" and "Deliberately left out". |
+| Question                                            | Decision                                                                                        | What follows                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| --------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| What the trail asks of the site                     | Pedro writes and edits during the walk, often with no signal, and uploads crawl                 | These are given, not things for a rehearsal to find out. Most of the decisions below follow from them.                                                                                                                                                                                                                                                                                                                                                                                    |
+| Where the journal is written                        | On the trail page, in a form that keeps drafts on the phone                                     | The phone never talks to Contentful on the trail, because Contentful does not support mobile browsers, cannot work offline and cannot resume an upload. So one form has to be built after all. Contentful stays for what is written at a desk. See "The journal".                                                                                                                                                                                                                         |
+| Where trail writing is kept                         | In the site's own store                                                                         | Journal entries, check-ins and changes of plan are kept by the site itself and are live as soon as they arrive. The site also keeps its own copy of what is written in Contentful. See "What lives where".                                                                                                                                                                                                                                                                                |
+| How photos travel                                   | Shrunk on the phone, then sent in pieces                                                        | About 1600 px on the long side and 300 to 500 KB, with the location inside the photo removed. Words go first; photos follow and carry on from where they stopped. Originals go into The Book afterwards. See "Sending an entry".                                                                                                                                                                                                                                                          |
+| Where photos are kept                               | On Pedro's phone, and in Contentful                                                             | The originals stay in the phone's photo library. The copies the site shows are kept in Contentful: the phone sends each small copy to the site, and the site passes it on. The site needs no photo store of its own. Pedro can upload originals to Contentful himself from a desk. See "Sending an entry".                                                                                                                                                                                |
+| What else Pedro can change from the phone           | A notice, and today's stage                                                                     | No laptop and no deploy. Today can become a shorter or longer stage, a rest day or a travel day. See "When the plan changes".                                                                                                                                                                                                                                                                                                                                                             |
+| What a day page shows when stages move              | A travel log                                                                                    | A day keeps its date. Its page shows the plan until the day comes, and what Pedro did from then on. See "When the plan changes".                                                                                                                                                                                                                                                                                                                                                          |
+| How pages are made                                  | The site makes each page when it is asked for, from its own copy                                | Publishing changes data and never needs a deploy, so the freeze on 23 April 2028 is a freeze of the code. If a page cannot be made, the last good copy is shown. The Book is the same pages, made once and saved as files. The detail belongs in the tech spec.                                                                                                                                                                                                                           |
+| How precise the public status is                    | The last named place Pedro has passed, and the part of the day                                  | On a published route a distance and a clock time together are a position, so both are for guests. See "Where Pedro is".                                                                                                                                                                                                                                                                                                                                                                   |
+| Who sends a check-in                                | OwnTracks, if rehearsal 1 shows it is quick with one hand                                       | It already keeps a position that cannot be sent and posts it later. If it takes more than ten seconds, the trail page keeps its own "I'm here" button. See "The trail page".                                                                                                                                                                                                                                                                                                              |
+| How light a page is                                 | As few requests as it can be                                                                    | Styles travel inside the page. No font file is shipped. The status refreshes only while the page is on screen and the day is still open, and the reader can stop it.                                                                                                                                                                                                                                                                                                                      |
+| What happens to guests when the invite words change | They stay guests                                                                                | Changing the words keeps new devices out. It removes no one who is already in. See "Guests".                                                                                                                                                                                                                                                                                                                                                                                              |
+| What the footer carries                             | Fifty's own, not the blog's                                                                     | A link to About, the journal's feed, a link to pataruco.dev and `hola@pataruco.dev`. No LinkedIn, GitHub or Bluesky, no blog feed and no "Updated on" line. See "On every page".                                                                                                                                                                                                                                                                                                          |
+| How times reach the reader                          | Kept in UTC. Shown in the walker's time, with the reader's own time added on their device       | The page arrives with the walker's time and country, so it reads without JavaScript. Where JavaScript runs, the reader's own time is added and called "your time". The site never names the reader's country. See "Rules" and "Language".                                                                                                                                                                                                                                                 |
+| Which apps carry messages                           | Email and text messages (SMS). No WhatsApp: Pedro does not use it, because it is a Meta product | The buttons that message Pedro open an email to an address made only for Fifty in his iCloud account. His phone number is not on the site: he gives it when he replies. Once a day is arranged, Pedro and the companion keep in touch by text message, on the day as well. Pedro posts in no family chat: one relative shares the link in the chat the family already uses, whichever app that is. The site still sends no notifications. See "Walk with me" and "Deliberately left out". |
 
 ## Names
 
 The left column is what this brief, the content model and the code call a thing. The middle column is what a visitor reads. They differ on purpose: the code needs one exact noun, and the reader needs the plainest one.
 
-| Name in the brief and the code | What the page says | Meaning |
-|---|---|---|
-| The Way | "The route" / "La ruta" | The whole route, Reading to Finisterre |
-| Leg | "Part", as in "part 3 of 4" / "Parte" | One of its four parts: England, the ferry to Spain, Ferrol to Santiago, Santiago to Finisterre |
-| Day | "Day 12" / "Día 12" | One calendar day of the trip, numbered 0 (Sunday 7 May 2028) to 21 (Sunday 28 May 2028) |
-| Stage | Its two ends: "Pontedeume to Betanzos" | The walking done on a day. Rest, sea and travel days have none |
-| Postcard | "Journal entry" / "Entrada del diario" | One journal entry: a photo or a few, and a few lines |
-| Check-in | "Pedro sent his location" / "Pedro envió su ubicación" | One position Pedro sends by hand |
-| Live trail | "Live" / "En vivo" | Positions sent by the tracker app on a meet-up day |
-| Notice | "Change of plan" / "Cambio de planes" | A few lines from Pedro when the plan changes, shown at the top of Home |
-| Travel log | "What Pedro did" / "Lo que hizo Pedro" | For each day, what Pedro actually did: where he walked from and to, or that he rested or travelled |
-| Season | Never named | Invitation, On the Way, or The Book |
-| Prologue | "Before the walk" / "Antes de la caminata" | Training walks before Day 0, written up as journal entries |
-| Guest | "You have Pedro's invite link" | Someone who has opened the invite link on their device |
-| Trail page | Only Pedro sees it | Pedro's private page for his location, his journal and changes of plan |
+| Name in the brief and the code | What the page says                                     | Meaning                                                                                            |
+| ------------------------------ | ------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
+| The Way                        | "The route" / "La ruta"                                | The whole route, Reading to Finisterre                                                             |
+| Leg                            | "Part", as in "part 3 of 4" / "Parte"                  | One of its four parts: England, the ferry to Spain, Ferrol to Santiago, Santiago to Finisterre     |
+| Day                            | "Day 12" / "Día 12"                                    | One calendar day of the trip, numbered 0 (Sunday 7 May 2028) to 21 (Sunday 28 May 2028)            |
+| Stage                          | Its two ends: "Pontedeume to Betanzos"                 | The walking done on a day. Rest, sea and travel days have none                                     |
+| Postcard                       | "Journal entry" / "Entrada del diario"                 | One journal entry: a photo or a few, and a few lines                                               |
+| Check-in                       | "Pedro sent his location" / "Pedro envió su ubicación" | One position Pedro sends by hand                                                                   |
+| Live trail                     | "Live" / "En vivo"                                     | Positions sent by the tracker app on a meet-up day                                                 |
+| Notice                         | "Change of plan" / "Cambio de planes"                  | A few lines from Pedro when the plan changes, shown at the top of Home                             |
+| Travel log                     | "What Pedro did" / "Lo que hizo Pedro"                 | For each day, what Pedro actually did: where he walked from and to, or that he rested or travelled |
+| Season                         | Never named                                            | Invitation, On the Way, or The Book                                                                |
+| Prologue                       | "Before the walk" / "Antes de la caminata"             | Training walks before Day 0, written up as journal entries                                         |
+| Guest                          | "You have Pedro's invite link"                         | Someone who has opened the invite link on their device                                             |
+| Trail page                     | Only Pedro sees it                                     | Pedro's private page for his location, his journal and changes of plan                             |
 
 ## Who it is for
 
-| Reader | Their situation | What they need |
-|---|---|---|
-| A companion | A friend deciding whether to walk a day, or a whole part | Which parts and days are possible, how hard they are, how to get there and home, how to say yes |
-| A follower | Family and friends far away, usually on a phone, usually arriving from a link a relative shared in the family chat, many reading in Spanish | Where he is today, that he has posted, what he saw. It has to load fast on a modest phone and a poor connection |
-| Pedro on the trail | Tired, one hand free, often no signal, uploads that crawl, a battery to protect | Send his location within ten seconds, write with no signal, post within a few minutes of finding some, change the plan when it changes, never lose what he wrote |
-| Pedro afterwards | Years later, with the family | The whole walk, intact, with nothing left to maintain |
+| Reader             | Their situation                                                                                                                             | What they need                                                                                                                                                   |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| A companion        | A friend deciding whether to walk a day, or a whole part                                                                                    | Which parts and days are possible, how hard they are, how to get there and home, how to say yes                                                                  |
+| A follower         | Family and friends far away, usually on a phone, usually arriving from a link a relative shared in the family chat, many reading in Spanish | Where he is today, that he has posted, what he saw. It has to load fast on a modest phone and a poor connection                                                  |
+| Pedro on the trail | Tired, one hand free, often no signal, uploads that crawl, a battery to protect                                                             | Send his location within ten seconds, write with no signal, post within a few minutes of finding some, change the plan when it changes, never lose what he wrote |
+| Pedro afterwards   | Years later, with the family                                                                                                                | The whole walk, intact, with nothing left to maintain                                                                                                            |
 
 ## Principles
 
@@ -93,26 +93,26 @@ The left column is what this brief, the content model and the code call a thing.
 
 ## Three seasons
 
-| Season | Dates | The front page leads with | Journal | Location |
-|---|---|---|---|---|
-| Invitation | Launch to 6 May 2028 | The invitation, and how to join each part | Entries from training walks | Off, except in rehearsals |
-| On the Way | 7 to 28 May 2028 | Today: the day, the stage, where Pedro is | An entry most days | Check-ins; live for guests on meet-up days |
-| The Book | From 29 May 2028 | The whole route, with every entry | Complete, with an afterword on top | Frozen: where each check-in fell along the route |
+| Season     | Dates                | The front page leads with                 | Journal                            | Location                                         |
+| ---------- | -------------------- | ----------------------------------------- | ---------------------------------- | ------------------------------------------------ |
+| Invitation | Launch to 6 May 2028 | The invitation, and how to join each part | Entries from training walks        | Off, except in rehearsals                        |
+| On the Way | 7 to 28 May 2028     | Today: the day, the stage, where Pedro is | An entry most days                 | Check-ins; live for guests on meet-up days       |
+| The Book   | From 29 May 2028     | The whole route, with every entry         | Complete, with an afterword on top | Frozen: where each check-in fell along the route |
 
 The season follows the date. Pedro can override it for his own device, so that each season can be previewed and rehearsed before it arrives without changing what anyone else sees.
 
 ## Site map
 
-| Page | Address | Job |
-|---|---|---|
-| Home | `/` | Changes by season, as above |
-| The route | `/way/` | The whole route on one page: four parts, twenty-two days |
-| A day | `/day/12/` | One page per day, 0 to 21. Before: the plan and how to join. On the day: where Pedro is. After: the journal entry |
-| Walk with me | `/join/` | The practical guide for companions, part by part and day by day |
-| Journal | `/journal/` | Every entry, newest first, training walks included |
-| About | `/about/` | Why Pedro is doing this, how the site works, what it does with a visitor's data |
-| Guest welcome | `/hello/<invite words>/` | Where the invite link lands. It marks the device as a guest and moves on to Home |
-| Trail | `/trail/` | Pedro only: his location, stop sharing, write the journal, post a change of plan |
+| Page          | Address                  | Job                                                                                                               |
+| ------------- | ------------------------ | ----------------------------------------------------------------------------------------------------------------- |
+| Home          | `/`                      | Changes by season, as above                                                                                       |
+| The route     | `/way/`                  | The whole route on one page: four parts, twenty-two days                                                          |
+| A day         | `/day/12/`               | One page per day, 0 to 21. Before: the plan and how to join. On the day: where Pedro is. After: the journal entry |
+| Walk with me  | `/join/`                 | The practical guide for companions, part by part and day by day                                                   |
+| Journal       | `/journal/`              | Every entry, newest first, training walks included                                                                |
+| About         | `/about/`                | Why Pedro is doing this, how the site works, what it does with a visitor's data                                   |
+| Guest welcome | `/hello/<invite words>/` | Where the invite link lands. It marks the device as a guest and moves on to Home                                  |
+| Trail         | `/trail/`                | Pedro only: his location, stop sharing, write the journal, post a change of plan                                  |
 
 Spanish pages mirror these under `/es/`. If Fifty becomes a section of pataruco.dev, these addresses sit under `/fifty/`.
 
@@ -124,12 +124,12 @@ In the Invitation season, Home is the invitation. It opens with one line ("Walk 
 
 Each part carries its own invitation. It has the part's name, distance and dates, a "You can join" label, one or two sentences on how, and a button: "Message Pedro to join part 2". The four invitations are:
 
-| Part | What the invitation says |
-|---|---|
-| 1. England: Reading to Southampton | Come for 1 day or more. 5 of the 7 days are easy day trips by train from London |
-| 2. Ferry to Spain: Portsmouth to Ferrol | Come on the ferry. It leaves Portsmouth on Monday evening and reaches Santander on Wednesday morning. You book your own ticket and cabin |
-| 3. Spain: Ferrol to Santiago de Compostela | Walk all 5 days, or fly to Santiago de Compostela for the arrival on Monday 22 May |
-| 4. Spain: Santiago de Compostela to Finisterre | Walk all 4 days, or only the last one on Saturday 27 May |
+| Part                                           | What the invitation says                                                                                                                 |
+| ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| 1. England: Reading to Southampton             | Come for 1 day or more. 5 of the 7 days are easy day trips by train from London                                                          |
+| 2. Ferry to Spain: Portsmouth to Ferrol        | Come on the ferry. It leaves Portsmouth on Monday evening and reaches Santander on Wednesday morning. You book your own ticket and cabin |
+| 3. Spain: Ferrol to Santiago de Compostela     | Walk all 5 days, or fly to Santiago de Compostela for the arrival on Monday 22 May                                                       |
+| 4. Spain: Santiago de Compostela to Finisterre | Walk all 4 days, or only the last one on Saturday 27 May                                                                                 |
 
 After the parts comes the easiest single day to join, worked through as an example: the walk, getting there, getting home, and the button "Message Pedro to join this day". Home ends with what following along will look like in May. A short letter from Pedro belongs here too, after the facts and not before them.
 
@@ -143,11 +143,11 @@ In any season, if dates are still provisional (see "Corrections"), Home says so 
 
 There is one page per day, and it changes as the day approaches and passes.
 
-| When | What the page shows |
-|---|---|
-| Before | From and to, distance in km and miles, terrain, what there is to see. How joinable it is, in words. How to get there and how to get home. What to bring. For guests, the "Message Pedro to join this day" button and an "Add to calendar" file |
-| On the day | Everything on Home's "today" block, for this day. For guests, the map |
-| After | What Pedro did that day, from the travel log. The journal entry. Where the check-ins fell. The plan folds away underneath, marked as the plan |
+| When       | What the page shows                                                                                                                                                                                                                            |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Before     | From and to, distance in km and miles, terrain, what there is to see. How joinable it is, in words. How to get there and how to get home. What to bring. For guests, the "Message Pedro to join this day" button and an "Add to calendar" file |
+| On the day | Everything on Home's "today" block, for this day. For guests, the map                                                                                                                                                                          |
+| After      | What Pedro did that day, from the travel log. The journal entry. Where the check-ins fell. The plan folds away underneath, marked as the plan                                                                                                  |
 
 Rest days, the sea crossing and the travel day get the same page with different words: there is no stage, and no location is expected.
 
@@ -159,7 +159,7 @@ Joinability is said in words, never by colour alone: "Day trip", "Day trip with 
 
 This is the page Pedro sends when someone asks "how would that work?". It is grouped by part. Each part opens with its invitation and its button, then lists its days in a table: date, stage, distance, how to get there and back, effort. The page also says what a day on the route is like, what to bring for a day walk, and what happens if Pedro is running early or late.
 
-There are two buttons, and each says what it does. "Message Pedro to join this day" and "Message Pedro to join part 3" open an email to Pedro with the day or the part already written in it. A line under the first one on a page says so, and says the email can be changed before it is sent. The email goes to an address made only for Fifty in Pedro's iCloud account, so it can be switched off after the walk. The buttons appear for guests only. Pedro's phone number is not on the site at all: he gives it when he replies. The public page says instead: "To join, you need my invite link. If you know me, ask me for it at hola@pataruco.dev." (Changed on 18 November: the walk is in May, but Pedro turns 50 in July, and there is one link for everyone, not one each.)
+There are two buttons, and each says what it does. "Message Pedro to join this day" and "Message Pedro to join part 3" open an email to Pedro with the day or the part already written in it. A line under the first one on a page says so, and says the email can be changed before it is sent. The email goes to an address made only for Fifty in Pedro's iCloud account, so it can be switched off after the walk. The buttons appear for guests only. Pedro's phone number is not on the site at all: he gives it when he replies. The public page says instead: "To join, you need my invite link. If you know me, ask me for it at hola@pataruco.dev." (Changed on 18 November: the walk is in May, but Pedro turns 50 in July. There is one link for everyone, not one each, and the old line did not say what the link is for or how to ask for it.)
 
 Once a day is arranged, Pedro and the companion keep in touch by text message (SMS), on the day as well. Nothing on the site opens WhatsApp or any other chat app.
 
@@ -185,23 +185,23 @@ After the walk the public sees where each check-in fell along the route. The raw
 
 Each line answers "where is Pedro?" first and says who did what. None of them guesses. The public line names a place and a part of the day. The guest line adds the distance, the clock time and the map.
 
-| Situation | What everyone sees | What guests see |
-|---|---|---|
-| Walking day, no location yet | "Pedro has not sent his location yet today." | The same |
-| Location sent before the first named place of the day | "Pedro has left Pontedeume. He sent his location this morning in Spain." | As in the next three rows |
-| Location sent under 2 hours ago | "Pedro has passed Miño. He sent his location this afternoon in Spain." | "Pedro is near Miño. He sent his location at 2:32pm in Spain (1:32pm your time). He has walked 11 km of today's 20 km." The map |
-| 2 to 6 hours ago | The same line. The part of the day carries its age | The same facts, with the age first: "3 hours ago, Pedro was near Miño." The map, with the age |
-| Over 6 hours ago | The same line | "Pedro last sent his location at 9:10am, near Pontedeume." Nothing more is implied. The map, with the age |
-| Arrived | "Pedro arrived in Betanzos this afternoon. He walked 20 km today." | "Pedro arrived in Betanzos at 4:40pm. He walked 20 km today." The map |
-| Location turned off | "Pedro has turned off location sharing today. He did this himself this morning." | The same, with the time: "at 8:05am". Nothing more |
-| Rest day | "Today is a rest day in Santiago de Compostela." | The map, if Pedro sends his location |
-| At sea | "Pedro is on the ferry to Spain. There is no phone signal until he lands in Santander on Wednesday 17 May." | The same |
-| Travelling | "Pedro is travelling from Santander to Ferrol today." | The same |
-| Meet-up day, tracker running | The same as any walking day | "Live. Updated 2 minutes ago", a moving pin and the path so far |
-| More than 1 km from the route | The same as any walking day | "Pedro is near Miño, a little way off the route." Distance walked is left alone. The map |
-| Pedro has changed where today's stage ends | "Pedro now stops in Miño today, not Betanzos. He changed the plan this morning." | The same |
-| Pedro has made today a rest day | "Pedro is resting in Pontedeume today. He changed the plan this morning." | The same |
-| Pedro has made today a travel day | "Pedro is travelling from Miño to Betanzos today. He changed the plan this morning." | The same |
+| Situation                                             | What everyone sees                                                                                          | What guests see                                                                                                                 |
+| ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| Walking day, no location yet                          | "Pedro has not sent his location yet today."                                                                | The same                                                                                                                        |
+| Location sent before the first named place of the day | "Pedro has left Pontedeume. He sent his location this morning in Spain."                                    | As in the next three rows                                                                                                       |
+| Location sent under 2 hours ago                       | "Pedro has passed Miño. He sent his location this afternoon in Spain."                                      | "Pedro is near Miño. He sent his location at 2:32pm in Spain (1:32pm your time). He has walked 11 km of today's 20 km." The map |
+| 2 to 6 hours ago                                      | The same line. The part of the day carries its age                                                          | The same facts, with the age first: "3 hours ago, Pedro was near Miño." The map, with the age                                   |
+| Over 6 hours ago                                      | The same line                                                                                               | "Pedro last sent his location at 9:10am, near Pontedeume." Nothing more is implied. The map, with the age                       |
+| Arrived                                               | "Pedro arrived in Betanzos this afternoon. He walked 20 km today."                                          | "Pedro arrived in Betanzos at 4:40pm. He walked 20 km today." The map                                                           |
+| Location turned off                                   | "Pedro has turned off location sharing today. He did this himself this morning."                            | The same, with the time: "at 8:05am". Nothing more                                                                              |
+| Rest day                                              | "Today is a rest day in Santiago de Compostela."                                                            | The map, if Pedro sends his location                                                                                            |
+| At sea                                                | "Pedro is on the ferry to Spain. There is no phone signal until he lands in Santander on Wednesday 17 May." | The same                                                                                                                        |
+| Travelling                                            | "Pedro is travelling from Santander to Ferrol today."                                                       | The same                                                                                                                        |
+| Meet-up day, tracker running                          | The same as any walking day                                                                                 | "Live. Updated 2 minutes ago", a moving pin and the path so far                                                                 |
+| More than 1 km from the route                         | The same as any walking day                                                                                 | "Pedro is near Miño, a little way off the route." Distance walked is left alone. The map                                        |
+| Pedro has changed where today's stage ends            | "Pedro now stops in Miño today, not Betanzos. He changed the plan this morning."                            | The same                                                                                                                        |
+| Pedro has made today a rest day                       | "Pedro is resting in Pontedeume today. He changed the plan this morning."                                   | The same                                                                                                                        |
+| Pedro has made today a travel day                     | "Pedro is travelling from Miño to Betanzos today. He changed the plan this morning."                        | The same                                                                                                                        |
 
 The thresholds are first guesses and should be easy to change.
 
@@ -387,22 +387,22 @@ The look is direction D: Fifty uses the styles of pataruco.dev. The canvas shows
 
 Everything below is taken from the blog's stylesheet, `src/styles/index.css` in `github.com/pataruco/blog`, at phone width.
 
-| Element | Value |
-|---|---|
-| Typeface | Inter, then the system sans-serif. The blog names Inter but does not load it, and Fifty does not ship it either: a font file is one more thing to fetch on a slow connection |
-| Body text | 18 px, line height 1.5, letter spacing 0.02em, black on white |
-| Page title | 40 px, weight 700, line height 1.1, letter spacing -0.02em |
-| Lead paragraph | 24 px, weight 600, line height 1.2 |
-| Section heading | 32 px, weight 700, letter spacing -0.01em |
-| Item heading | 24 px, weight 700 |
-| Links | #333, weight 600, underlined |
-| Rules | 1 px, #e5e5e5 between items; 1 px black under the header and over the footer |
-| Main button | Black, white text, 10 px radius, underlined label |
-| Second button | The same shape with a 2 px black outline and no fill, as the main button looks on hover. Used for "Message Pedro to join part 1" |
-| Card for what matters most | #00599f with white text. Used for "Pedro has passed Miño" |
-| Quiet box | #e0f0fa. Used for "You can see Pedro on a map" |
-| Notice | 2 px black outline. Used for "Dates in Spain might change by 1 day" |
-| Page gutter | 16 px at phone width |
+| Element                    | Value                                                                                                                                                                        |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Typeface                   | Inter, then the system sans-serif. The blog names Inter but does not load it, and Fifty does not ship it either: a font file is one more thing to fetch on a slow connection |
+| Body text                  | 18 px, line height 1.5, letter spacing 0.02em, black on white                                                                                                                |
+| Page title                 | 40 px, weight 700, line height 1.1, letter spacing -0.02em                                                                                                                   |
+| Lead paragraph             | 24 px, weight 600, line height 1.2                                                                                                                                           |
+| Section heading            | 32 px, weight 700, letter spacing -0.01em                                                                                                                                    |
+| Item heading               | 24 px, weight 700                                                                                                                                                            |
+| Links                      | #333, weight 600, underlined                                                                                                                                                 |
+| Rules                      | 1 px, #e5e5e5 between items; 1 px black under the header and over the footer                                                                                                 |
+| Main button                | Black, white text, 10 px radius, underlined label                                                                                                                            |
+| Second button              | The same shape with a 2 px black outline and no fill, as the main button looks on hover. Used for "Message Pedro to join part 1"                                             |
+| Card for what matters most | #00599f with white text. Used for "Pedro has passed Miño"                                                                                                                    |
+| Quiet box                  | #e0f0fa. Used for "You can see Pedro on a map"                                                                                                                               |
+| Notice                     | 2 px black outline. Used for "Dates in Spain might change by 1 day"                                                                                                          |
+| Page gutter                | 16 px at phone width                                                                                                                                                         |
 
 Two highlight colours come from the print colours in Pedro's logo, and each has one meaning. Yellow (#ff0) means now: "Today". Cyan (#0ff) means an invitation: "You can join". Both sit behind black text and both always carry their words.
 
@@ -422,15 +422,15 @@ Two other directions stay on the canvas as a record and are not being taken furt
 
 The canvas was drawn before the decisions of 17 November. Where the two differ, this brief wins.
 
-| On the canvas | What this brief says |
-|---|---|
-| Under the first button: "This opens WhatsApp or email with the day filled in" and "Se abre WhatsApp o tu correo con el día ya escrito" | The button opens an email. Nothing opens WhatsApp |
-| All four boards show a guest's screen: the buttons, and on Day 12 the kilometres, the clock time, the progress bar and the map box | The public's screens are not drawn. They have no buttons. On Day 12 they show the last place passed and the part of the day |
-| The boards are set in Inter, which the export packs | No font file is shipped. Each phone uses its own sans-serif, so lines will break in slightly different places |
-| The footer is the blog's: LinkedIn, GitHub, Bluesky, the blog's feed, `hola@pataruco.dev` and an "Updated on" line | Fifty's own footer. See "On every page" |
-| The reader's own time is named by country: "(1:32pm in the UK)" and "(8:32 a. m. en Venezuela)" | It is called "your time" and "tu hora". The site never names the reader's country |
-| A number and its unit break across lines: "20" then "km", "1" then "day" | A number and its unit stay on one line |
-| The link on a one-line entry title is about 26 px tall | Touch targets are at least 44 px |
+| On the canvas                                                                                                                          | What this brief says                                                                                                        |
+| -------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Under the first button: "This opens WhatsApp or email with the day filled in" and "Se abre WhatsApp o tu correo con el día ya escrito" | The button opens an email. Nothing opens WhatsApp                                                                           |
+| All four boards show a guest's screen: the buttons, and on Day 12 the kilometres, the clock time, the progress bar and the map box     | The public's screens are not drawn. They have no buttons. On Day 12 they show the last place passed and the part of the day |
+| The boards are set in Inter, which the export packs                                                                                    | No font file is shipped. Each phone uses its own sans-serif, so lines will break in slightly different places               |
+| The footer is the blog's: LinkedIn, GitHub, Bluesky, the blog's feed, `hola@pataruco.dev` and an "Updated on" line                     | Fifty's own footer. See "On every page"                                                                                     |
+| The reader's own time is named by country: "(1:32pm in the UK)" and "(8:32 a. m. en Venezuela)"                                        | It is called "your time" and "tu hora". The site never names the reader's country                                           |
+| A number and its unit break across lines: "20" then "km", "1" then "day"                                                               | A number and its unit stay on one line                                                                                      |
+| The link on a one-line entry title is about 26 px tall                                                                                 | Touch targets are at least 44 px                                                                                            |
 
 Not drawn yet: the change-of-plan notice, a day page with its travel log, the trail page, Walk with me and the journal.
 
@@ -440,27 +440,27 @@ An automated accessibility check of the four boards of direction D, with the WCA
 
 Training walks are the test plan. Each proves one more piece, and each is written up as a journal entry.
 
-| Rehearsal | What it proves |
-|---|---|
-| 1 | A check-in from a field with one bar of signal, and one with none that arrives later. Sent from OwnTracks with one hand: if that takes more than ten seconds, the trail page gets its own button |
-| 2 | A journal entry written with no signal, then published from the phone on a connection slowed to the worst the walk will see, photos included, in both languages. Airplane mode goes on halfway through a photo, and the photo carries on afterwards |
-| 3 | The tracker app running for a whole walking day: battery used, gaps in the trail |
-| 4 | A friend with the invite link finds Pedro on the day and reaches him by text. Pedro first checks that his phone does not hide texts from people who are not in his contacts |
-| 5 | Someone without the link confirms they cannot see the map, the distance or the time. The same check then runs by itself every time the site is deployed |
-| 6 | Dress rehearsal: walk Day 1, Reading to Silchester, with the site switched to On the Way |
-| 7 | The plan slips: Pedro posts a notice and changes today's stage from the phone. The day's page then shows what he did, with the plan underneath |
-| 8 | Pedro signs in to the trail page from a borrowed phone |
-| 9 | The Book: a training weekend is saved as files and opened with no network |
+| Rehearsal | What it proves                                                                                                                                                                                                                                      |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1         | A check-in from a field with one bar of signal, and one with none that arrives later. Sent from OwnTracks with one hand: if that takes more than ten seconds, the trail page gets its own button                                                    |
+| 2         | A journal entry written with no signal, then published from the phone on a connection slowed to the worst the walk will see, photos included, in both languages. Airplane mode goes on halfway through a photo, and the photo carries on afterwards |
+| 3         | The tracker app running for a whole walking day: battery used, gaps in the trail                                                                                                                                                                    |
+| 4         | A friend with the invite link finds Pedro on the day and reaches him by text. Pedro first checks that his phone does not hide texts from people who are not in his contacts                                                                         |
+| 5         | Someone without the link confirms they cannot see the map, the distance or the time. The same check then runs by itself every time the site is deployed                                                                                             |
+| 6         | Dress rehearsal: walk Day 1, Reading to Silchester, with the site switched to On the Way                                                                                                                                                            |
+| 7         | The plan slips: Pedro posts a notice and changes today's stage from the phone. The day's page then shows what he did, with the plan underneath                                                                                                      |
+| 8         | Pedro signs in to the trail page from a borrowed phone                                                                                                                                                                                              |
+| 9         | The Book: a training weekend is saved as files and opened with no network                                                                                                                                                                           |
 
-| When | What |
-|---|---|
-| Spring 2027 | Invitation pages and the trail page built. First rehearsals |
-| Around May 2027 | Ferry bookings open. Spanish dates stop being provisional |
-| Summer 2027 | The invitation goes out, once the ferry is booked |
-| February 2028 | Reminder to book flights, as the itinerary already plans |
-| 23 April 2028 | Freeze. The code does not change after this. Words, photos and positions still do |
-| 7 May 2028 | On the Way |
-| June 2028 | Frozen into The Book |
+| When            | What                                                                              |
+| --------------- | --------------------------------------------------------------------------------- |
+| Spring 2027     | Invitation pages and the trail page built. First rehearsals                       |
+| Around May 2027 | Ferry bookings open. Spanish dates stop being provisional                         |
+| Summer 2027     | The invitation goes out, once the ferry is booked                                 |
+| February 2028   | Reminder to book flights, as the itinerary already plans                          |
+| 23 April 2028   | Freeze. The code does not change after this. Words, photos and positions still do |
+| 7 May 2028      | On the Way                                                                        |
+| June 2028       | Frozen into The Book                                                              |
 
 ## Deliberately left out
 
