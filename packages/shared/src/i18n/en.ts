@@ -48,9 +48,9 @@ export const en = {
   home: {
     title: 'Walk a day with me',
     description:
-      "In May 2028 I turn 50. To mark it, I'm walking from Reading in England to Finisterre in Spain. You can join me for a day or more.",
+      "In May 2028 I'm walking from Reading in England to Finisterre in Spain. It's for my 50th birthday in July. You can join me for a day or more.",
     h1: 'Walk a day with me',
-    lead: "In May 2028 I turn 50. To mark it, I'm walking from Reading in England to Finisterre in Spain. You can join me for a day or more.",
+    lead: "In May 2028 I'm walking from Reading in England to Finisterre in Spain. It's for my 50th birthday in July. You can join me for a day or more.",
     seeWhere: 'See where you can join',
     plan: {
       heading: 'The plan',
@@ -79,7 +79,7 @@ export const en = {
       heading: ({ parts }) => `The route in ${parts} parts`,
       intro: `You can join any part. Come for 1${NBSP}day or stay for more.`,
       publicLine:
-        "This is an open letter to people I know. If that's you, ask me for your link.",
+        'To join, you need my invite link. If you know me, ask me for it at hola@pataruco.dev.',
     },
     mailLine:
       'This opens an email to Pedro with the part or day already written in it. You can change the email before you send it.',
